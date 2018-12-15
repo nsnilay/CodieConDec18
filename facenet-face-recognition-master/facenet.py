@@ -10,11 +10,11 @@ from numpy import genfromtxt
 import tensorflow as tf
 from fr_utils import *
 from inception_blocks_v2 import *
-import win32com.client as wincl
+# import win32com.client as wincl
 
 PADDING = 50
 ready_to_detect_identity = True
-windows10_voice_interface = wincl.Dispatch("SAPI.SpVoice")
+# windows10_voice_interface = wincl.Dispatch("SAPI.SpVoice")
 
 FRmodel = faceRecoModel(input_shape=(3, 96, 96))
 
@@ -55,7 +55,7 @@ def prepare_database():
     for file in glob.glob("images/*"):
         identity = os.path.splitext(os.path.basename(file))[0]
         database[identity] = img_path_to_encoding(file, FRmodel)
-
+        print(file)
     return database
 
 def webcam_face_recognizer(database):
@@ -149,6 +149,7 @@ def who_is_it(image, database, model):
     min_dist -- the minimum distance between image_path encoding and the encodings from the database
     identity -- string, the name prediction for the person on image_path
     """
+    print("image before encoding", image.shape)
     encoding = img_to_encoding(image, model)
     
     min_dist = 100
@@ -185,14 +186,14 @@ def welcome_users(identities):
         welcome_message += 'and %s, ' % identities[-1]
         welcome_message += 'have a nice day!'
 
-    windows10_voice_interface.Speak(welcome_message)
+    # windows10_voice_interface.Speak(welcome_message)
 
     # Allow the program to start detecting identities again
     ready_to_detect_identity = True
 
 if __name__ == "__main__":
     database = prepare_database()
-    webcam_face_recognizer(database)
+    # webcam_face_recognizer(database)
 
 # ### References:
 # 
