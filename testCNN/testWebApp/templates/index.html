@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="{{ url_for('static', filename='myDisplay.js') }}"></script>
+  <title>Streaming Video Recorder</title>
+</head>
+<body>
+  <h1>Streaming Video Recorder</h1>
+  <div id="recorder">
+    <button id="record">Record</button>
+      <button onclick="myFunction('nilay')">Try it</button>
+    <button id="stop">Stop</button>
+    <a id="download"></a>
+    <script type="text/javascript" src="{{ url_for('static', filename='recorder.js') }}"></script>
+  </div>
+  <div id="display">
+    <h1 id="displayScreen">Display Screen</h1>
+
+  </div>
+<div id="table_container"></div>
+
+<script>
+    function myFunction(name) {
+      var para = document.createElement("P");
+      var t = document.createTextNode("This is a paragraph.");
+      para.appendChild(t);
+      document.body.appendChild(para);
+
+      var names = ["jsfidde", "adobe"];
+      var myPhoto = ["http://cdn.sstatic.net/stackoverflow/img/tag-adobe.png",
+    "http://mediad.publicbroadcasting.net/p/mpbn/files/201609/PrimaryLogo_RGB.png"];
+      var table = document.createElement("table");
+      document.getElementById("table_container").appendChild(table);
+
+    for (var i=0, len = names.length; i < len; ++i) {
+           var row = document.createElement("tr"),
+            name = document.createElement("td"),
+            photo = document.createElement("td"),
+            img = new Image();
+
+            name.appendChild(document.createTextNode(names[i]));
+
+            img.src = myPhoto[i];
+            img.alt = names[i];
+            photo.appendChild(img);
+
+            row.appendChild(photo);
+            row.appendChild(name);
+
+            table.appendChild(row);
+            }
+
+
+    }
+</script>
+</body>
+</html>
